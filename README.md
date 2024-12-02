@@ -78,13 +78,30 @@ This project aims to provide:
 
 ---
 
-## 🧰 Tech Stack
+## 🧰 Tech Stack  
 
-- **Frontend**: HTML, CSS, JavaScript 🎨
-- **Backend**: Flask 🌐
-- **Database**: MySQL 💾
+### Frontend  
+- **HTML**, **CSS**, **JavaScript** 🎨  
+- **JSP (Java Server Pages)**  
 
----
+### Backend  
+- **Java Spring Boot 3** 🌐  
+- **Spring Data JPA**  
+- **Spring Security**  
+
+### Database  
+- **MySQL 8.0** 💾  
+
+### Build Tool  
+- **Maven** 🛠️  
+
+### Tools and IDE  
+- **Eclipse IDE**  
+
+### Server  
+- **Apache Tomcat 9**  
+
+---  
 
 ## 🔮 Future Enhancements
 
