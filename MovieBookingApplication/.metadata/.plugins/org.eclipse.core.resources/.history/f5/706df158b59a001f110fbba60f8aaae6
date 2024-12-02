@@ -1,0 +1,12 @@
+package com.infosys.movieSystem.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.infosys.movieSystem.bean.MovieShow;
+
+public interface MovieShowRepository extends JpaRepository<MovieShow, MovieShowEmbed> {
+
+    @Query("SELECT max(movieShowId) from MovieShow")
+    public Long getLastId();
+}

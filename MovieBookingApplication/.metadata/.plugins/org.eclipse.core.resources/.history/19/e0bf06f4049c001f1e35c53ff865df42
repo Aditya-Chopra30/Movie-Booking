@@ -1,0 +1,87 @@
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Entry Page</title>
+  
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<c:url value='/css/style.css' />"> <!-- Link to custom CSS file -->
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Add New Movie</h2>
+        <form:form modelAttribute="movieRecord" action="/addMovie" method="post" class="form-horizontal">
+            <div class="form-group row">
+                <label for="movieId" class="col-sm-2 col-form-label">Movie ID:</label>
+                <div class="col-sm-10">
+                    <form:input path="movieId" readonly="true" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="movieName" class="col-sm-2 col-form-label">Movie Name:</label>
+                <div class="col-sm-10">
+                    <form:input path="movieName" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="language" class="col-sm-2 col-form-label">Language:</label>
+                <div class="col-sm-10">
+                    <form:select path="language" class="form-control">
+                        <form:option value="" label="Select Language" />
+                        <form:option value="Telugu" label="Telugu" />
+                        <form:option value="English" label="English" />
+                        <form:option value="Hindi" label="Hindi" />
+                        <form:option value="Bengali" label="Bengali" />
+                        <form:option value="Marathi" label="Marathi" />
+                        <form:option value="Tamil" label="Tamil" />
+                        <form:option value="Gujarati" label="Gujarati" />
+                        <form:option value="Malayalam" label="Malayalam" />
+                        <form:option value="Kannada" label="Kannada" />
+                        <form:option value="Punjabi" label="Punjabi" />
+                        <form:option value="Odia" label="Odia" />
+                        <form:option value="Assamese" label="Assamese" />
+                        <form:option value="Urdu" label="Urdu" />
+                        <form:option value="Nepali" label="Nepali" />
+                        <form:option value="Manipuri" label="Manipuri" />
+                        <form:option value="Kashmiri" label="Kashmiri" />
+                        <form:option value="Spanish" label="Spanish" />
+                        <form:option value="French" label="French" />
+                        <form:option value="Other" label="Other" />
+                    </form:select>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label for="genre" class="col-sm-2 col-form-label">Genre:</label>
+                <div class="col-sm-10">
+                    <form:input path="genre" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="duration" class="col-sm-2 col-form-label">Duration (minutes):</label>
+                <div class="col-sm-10">
+                    <form:input path="duration" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="ratings" class="col-sm-2 col-form-label">Ratings:</label>
+                <div class="col-sm-10">
+                    <form:input path="ratings" class="form-control" />
+                </div>
+            </div>
+           
+            <div class="form-group row">
+                <div class="col-sm-10 offset-sm-2">
+                    <button type="submit" class="btn btn-primary">Add Movie</button>
+                    <button type="reset" class="btn btn-secondary ml-2">Reset</button>
+                </div>
+            </div>
+        </form:form> <!-- Closing tag for form:form -->
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+package com.infosys.movieSystem.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.infosys.movieSystem.bean.Movie;
+
+import java.util.List;
+
+@Repository
+public interface MovieDao extends JpaRepository<Movie, String> {
+    Movie findByMovieName(String movieName); // Retrieve movie by name
+    void deleteMovieByName(String movieName); // Delete movie by name
+    List<Movie> findAll();
+    String generateMovieId(); // Implement ID generation logic
+}

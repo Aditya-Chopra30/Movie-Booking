@@ -1,0 +1,38 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Update Movie</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Update Movie</h1>
+
+        <form action="/updateMovie" method="post">
+            <input type="hidden" name="movieId" value="${movieRecord.movieId}"/>
+            <input type="hidden" name="movieName" value="${movieRecord.movieName}"/> <!-- Add hidden field for movieName -->
+            <div class="form-group">
+                <label>Movie Name</label>
+                <input type="text" name="movieName" class="form-control" value="${movieRecord.movieName}" required>
+            </div>
+            <div class="form-group">
+                <label>Genre</label>
+                <input type="text" name="genre" class="form-control" value="${movieRecord.genre}" required>
+            </div>
+            <div class="form-group">
+                <label>Duration (mins)</label>
+                <input type="number" name="duration" class="form-control" value="${movieRecord.duration}" required>
+            </div>
+            <div class="form-group">
+                <label>Ratings</label>
+                <input type="number" name="ratings" class="form-control" value="${movieRecord.ratings}" required step="0.1">
+            </div>
+            <button type="submit" class="btn btn-primary">Update Movie</button>
+            <a href="/movieReport" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>

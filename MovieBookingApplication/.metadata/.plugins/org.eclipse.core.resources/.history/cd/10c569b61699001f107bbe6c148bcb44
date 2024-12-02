@@ -1,0 +1,71 @@
+package com.infosys.movieSystem.bean;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "movie") // Specify the table name in the database
+public class Movie {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-generate ID
+    private String movieId; // Unique identifier for each movie
+
+    private String movieName; // Name of the movie
+    private String genre; // Genre of the movie
+    private int duration; // Duration of the movie in minutes
+    private double ratings; // Ratings of the movie
+
+    // Default constructor
+    public Movie() {
+    }
+
+    // Constructor with parameters
+    public Movie(String movieId) {
+        this.movieId = movieId;
+    }
+
+    // Getters and setters
+    public String getMovieId() {
+        return movieId;
+    }
+
+    public void setMovieId(String movieId) {
+        this.movieId = movieId;
+    }
+
+    public String getMovieName() {
+        return movieName;
+    }
+
+    public void setMovieName(String movieName) {
+        this.movieName = movieName;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public double getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(double ratings) {
+        this.ratings = ratings;
+    }
+}

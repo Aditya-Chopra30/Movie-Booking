@@ -1,0 +1,8 @@
+package com.infosys.movieSystem.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.infosys.movieSystem.bean.MovieShow;
+import com.infosys.movieSystem.bean.MovieShowEmbed;
+
+public interface MovieShowRepository extends JpaRepository<MovieShow, MovieShowEmbed> {
+}

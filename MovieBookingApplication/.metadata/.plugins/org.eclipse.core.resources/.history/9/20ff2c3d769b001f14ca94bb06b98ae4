@@ -1,0 +1,142 @@
+package com.infosys.movieSystem.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.infosys.movieSystem.bean.Movie;
+import com.infosys.movieSystem.bean.ShowTime;
+import com.infosys.movieSystem.dao.MovieDao;
+//import com.infosys.movieSystem.dao.MovieShowDao;
+import com.infosys.movieSystem.dao.ShowTimeDao;
+import com.infosys.movieSystem.service.ShowTimeService;
+
+@Controller
+public class MovieController {
+
+    @Autowired
+    private ShowTimeDao showTimeDao;
+
+    @Autowired
+    private ShowTimeService showTimeService;
+
+    @Autowired
+    private MovieDao movieDao;
+
+    //@Autowired
+   // private MovieShowDao movieShowDao;
+
+    // Show form for adding a new ShowTime
+    @GetMapping("/addShowTime")
+    public ModelAndView showShowTimeEntryPage() {
+        Integer newId = showTimeDao.generateShowTimeId();
+        ShowTime showTime = new ShowTime(newId);
+        ModelAndView mv = new ModelAndView("showTimeEntryPage");
+        mv.addObject("showTimeRecord", showTime);
+        return mv;
+    }
+
+    // Save a new ShowTime entry
+    @PostMapping("/addShowTime/")
+    public ModelAndView saveShowTimeEntryPage(@ModelAttribute("showTimeRecord") ShowTime showTime) {
+        Double royalPrice = showTimeService.createRoyalPrice(showTime.getShowTimePremierePrice());
+        showTime.setShowTimeRoyalPrice(royalPrice);
+        showTimeDao.save(showTime);
+        return new ModelAndView("redirect:/index");
+    }
+
+    // Show report page for ShowTime entries
+    @GetMapping("/showTimeReport/")
+    public ModelAndView showShowTimeReportPage() {
+        List<ShowTime> showTimeList = showTimeDao.findAll();
+        ModelAndView modelAndView = new ModelAndView("showTimeReportPage");
+        modelAndView.addObject("showTimeList", showTimeList);
+        return modelAndView;
+    }
+
+    // Delete a ShowTime by ID
+    @GetMapping("/showTimeDeletion/{id}")
+    public ModelAndView deleteShowTime(@PathVariable Integer id) {
+        showTimeDao.deleteShowTimeById(id);
+        return new ModelAndView("redirect:/showTimeReport");
+    }
+
+    // Show update page for a specific ShowTime entry
+    @GetMapping("/showTimeUpdation/{id}")
+    public ModelAndView showShowTimeUpdatePage(@PathVariable Integer id) {
+        ShowTime showTime = showTimeDao.findById(id);
+        if (showTime == null) {
+            return new ModelAndView("redirect:/showTimeReport");
+        }
+        ModelAndView mv = new ModelAndView("showTimeUpdatePage");
+        mv.addObject("showTimeRecord", showTime);
+        return mv;
+    }
+
+    // Update a ShowTime entry
+    @PostMapping("/updateShowTime")
+    public ModelAndView updateShowTime(@ModelAttribute("showTimeRecord") ShowTime showTime) {
+        Double royalPrice = showTimeService.createRoyalPrice(showTime.getShowTimePremierePrice());
+        showTime.setShowTimeRoyalPrice(royalPrice);
+        showTimeDao.save(showTime);
+        return new ModelAndView("redirect:/showTimeReport");
+    }
+
+    // Show form for adding a new Movie
+    @GetMapping("/addMovie")
+    public ModelAndView showMovieEntryPage() {
+        String newId = movieDao.generateMovieId();
+        Movie movie = new Movie(newId);
+        ModelAndView mv = new ModelAndView("movieEntryPage");
+        mv.addObject("movieRecord", movie);
+        return mv;
+    }
+
+    // Save a new Movie entry
+    @PostMapping("/addMovie/")
+    public ModelAndView saveMovieEntryPage(@ModelAttribute("movieRecord") Movie movie) {
+        movieDao.save(movie);
+        return new ModelAndView("redirect:/index");
+    }
+
+    // Show report page for Movie entries
+    @GetMapping("/movieReport/")
+    public ModelAndView showMovieReportPage() {
+        List<Movie> movieList = movieDao.findAll();
+        ModelAndView mv = new ModelAndView("movieReportPage");
+        mv.addObject("movieList", movieList);
+        return mv;
+    }
+
+    // Delete a Movie by ID
+    @GetMapping("/movieDeletion/{id}")
+    public ModelAndView deleteMovie(@PathVariable String id) {
+        movieDao.deleteMovieById(id);
+        return new ModelAndView("redirect:/movieReport");
+    }
+
+    // Show update page for a specific Movie entry
+    @GetMapping("/movieUpdation/{id}")
+    public ModelAndView showMovieUpdatePage(@PathVariable String id) {
+        Movie movie = movieDao.findById(id);
+        if (movie == null) {
+            return new ModelAndView("redirect:/movieReport");
+        }
+        ModelAndView mv = new ModelAndView("movieUpdatePage");
+        mv.addObject("movieRecord", movie);
+        return mv;
+    }
+
+    // Update a Movie entry
+    @PostMapping("/updateMovie")
+    public ModelAndView updateMovie(@ModelAttribute("movieRecord") Movie movie) {
+        movieDao.save(movie);
+        return new ModelAndView("redirect:/movieReport");
+    }
+}

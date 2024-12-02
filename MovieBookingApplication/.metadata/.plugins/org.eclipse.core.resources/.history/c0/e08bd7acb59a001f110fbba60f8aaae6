@@ -1,0 +1,11 @@
+package com.infosys.movieSystem.dao;
+
+import java.util.List;
+import com.infosys.movieSystem.model.MovieShow;
+
+public interface MovieShowDao {
+
+    void save(MovieShow movieShow);
+
+    List<MovieShow> findAll();
+}

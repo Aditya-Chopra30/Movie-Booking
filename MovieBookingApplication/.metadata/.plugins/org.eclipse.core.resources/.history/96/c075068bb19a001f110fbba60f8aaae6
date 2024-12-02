@@ -1,0 +1,49 @@
+package com.infosys.movieSystem.dao;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.infosys.movieSystem.bean.MovieShow;
+import com.infosys.movieSystem.bean.MovieShowEmbed;
+
+@Repository
+public class MovieShowDaoImpl implements MovieShowDao {
+
+    @Autowired
+    private MovieShowRepository repository;
+
+    @Override
+    public void save(MovieShow movieShow) {
+        repository.save(movieShow);
+    }
+
+    @Override
+    public String generateMovieShowId() {
+        Long newId = repository.getLastId();
+        if (newId == null) {
+            newId = 100001L;
+        } else {
+            newId++;
+        }
+        return newId.toString();
+    }
+
+    @Override
+    public MovieShow findById(MovieShowEmbed embeddedId) {
+        Optional<MovieShow> result = repository.findById(embeddedId);
+        return result.orElse(null);
+    }
+
+    @Override
+    public List<MovieShow> findAll() {
+        return repository.findAll();
+    }
+
+    @Override
+    public void deleteMovieShowById(MovieShowEmbed embeddedId) {
+        repository.deleteById(embeddedId);
+    }
+}

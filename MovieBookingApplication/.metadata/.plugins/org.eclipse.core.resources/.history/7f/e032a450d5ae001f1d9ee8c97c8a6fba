@@ -1,0 +1,40 @@
+package com.infosys.movieSystem.dao;
+
+import java.util.List;
+import java.util.Optional;
+
+import com.infosys.movieSystem.bean.TicketBooking;
+
+public class TicketBookingDaoImpl implements TicketBookingDao {
+
+	@Override
+	public void save(TicketBooking ticketBooking) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public List<TicketBooking> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TicketBooking getTicket(Long ticketId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Long generateId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Optional<TicketBooking> getTicket1(Long ticketId) {
+		// TODO Auto-generated method stub
+		return Optional.empty();
+	}
+
+}

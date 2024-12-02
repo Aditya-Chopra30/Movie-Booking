@@ -1,0 +1,5 @@
+package com.infosys.movieSystem.dao;
+
+public interface TicketBookingDao {
+
+}

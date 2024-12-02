@@ -1,0 +1,52 @@
+package com.infosys.movieSystem.dao;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+
+import com.infosys.movieSystem.bean.TicketBooking;
+
+
+@Service
+@Repository
+public class TicketBookingDaoImpl implements TicketBookingDao {
+	
+	
+
+	@Autowired
+	public TicketBookingRepository repository;
+	
+	@Override
+	public void save(TicketBooking ticketBooking) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public List<TicketBooking> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TicketBooking getTicket(Long ticketId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Long generateId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Optional<TicketBooking> getTicket1(Long ticketId) {
+		// TODO Auto-generated method stub
+		return Optional.empty();
+	}
+
+}

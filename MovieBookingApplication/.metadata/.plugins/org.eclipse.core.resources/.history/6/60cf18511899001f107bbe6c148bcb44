@@ -1,0 +1,78 @@
+package com.infosys.movieSystem.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.infosys.movieSystem.bean.Movie;
+import com.infosys.movieSystem.dao.MovieDao;
+
+@Controller
+public class MovieController {
+
+    @Autowired
+    private MovieDao movieDao;
+
+    // Show form for adding a new Movie
+    @GetMapping("/addMovie")
+    public ModelAndView showMovieEntryPage() {
+        String newId = movieDao.generateMovieId(); // Generate a new movie ID
+        Movie movie = new Movie(newId);
+        ModelAndView mv = new ModelAndView("movieEntryPage");
+        mv.addObject("movieRecord", movie);
+        return mv;
+    }
+
+    // Save a new Movie entry
+    @PostMapping("/addMovie")
+    public ModelAndView saveMovieEntryPage(@ModelAttribute("movieRecord") Movie movie) {
+        movieDao.save(movie);
+        return new ModelAndView("redirect:/movieReport");
+    }
+
+    // Show report page for Movie entries
+    @GetMapping("/movieReport")
+    public ModelAndView showMovieReportPage() {
+        List<Movie> movieList = movieDao.findAll();
+        ModelAndView mv = new ModelAndView("movieReportPage");
+        mv.addObject("movieList", movieList);
+        return mv;
+    }
+
+    // Delete a Movie by name (or other attributes)
+    @GetMapping("/movieDeletion/{movieName}")
+    public ModelAndView deleteMovie(@PathVariable String movieName) {
+        try {
+            movieDao.deleteMovieByName(movieName); // Change method to delete by movieName
+        } catch (Exception e) {
+            // Log error
+            System.err.println("Error deleting movie with name: " + movieName + ". Error: " + e.getMessage());
+        }
+        return new ModelAndView("redirect:/movieReport");
+    }
+
+    // Show update page for a specific Movie entry by name
+    @GetMapping("/movieUpdation/{movieName}")
+    public ModelAndView showMovieUpdatePage(@PathVariable String movieName) {
+        Movie movie = movieDao.findByMovieName(movieName); // Find movie by name
+        if (movie == null) {
+            return new ModelAndView("redirect:/movieReport");
+        }
+        ModelAndView mv = new ModelAndView("movieUpdatePage");
+        mv.addObject("movieRecord", movie);
+        return mv;
+    }
+
+    // Update a Movie entry
+    @PostMapping("/updateMovie")
+    public ModelAndView updateMovie(@ModelAttribute("movieRecord") Movie movie) {
+        movieDao.save(movie); // This will save/update the movie
+        return new ModelAndView("redirect:/movieReport");
+    }
+}

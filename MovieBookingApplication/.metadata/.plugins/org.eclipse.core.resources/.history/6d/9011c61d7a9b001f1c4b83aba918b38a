@@ -1,0 +1,14 @@
+package com.infosys.movieSystem.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import com.infosys.movieSystem.bean.Movie;
+
+public interface MovieRepository extends JpaRepository<Movie, String> {
+
+    @Query("SELECT max(movieId) FROM Movie")
+    public String getLastId();
+    @Query("select a from Movie a where language=?1")
+    Public List<Movie>getLanguageWiseMovieList(String language);
+    
+}

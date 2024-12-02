@@ -1,0 +1,7 @@
+package com.infosys.movieSystem.bean;
+
+import java.io.Serializable;
+
+public class MovieShowEmbed implements Serializable {
+
+}
