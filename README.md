@@ -108,3 +108,6 @@ This project aims to provide:
 - **Payment Gateway Integration** 💳
 - **User Login System** 🧑‍💻
 - **Show Recommendations** based on user preferences 🎞️
+
+Link for the ppt of the project: https://www.canva.com/design/DAGXlcUBEJI/_mI8LkEwQr1TfH1xBrYvUg/edit
+
